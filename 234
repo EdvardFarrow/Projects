@@ -1,0 +1,59 @@
+import csv
+
+class Extraction:
+  @staticmethod
+  def from_csv(file_path):
+    sales = []
+    try:
+      with open(file_path, 'r', newline='', encoding='utf-8') as csv_file:
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+          id = row['id']
+          date = row['date']
+          amount = float(row['amount'])
+          product = row['product']
+          sale = Sale(id, date, amount, product)
+          sales.append(sale)
+    except Exception as e:
+            print(f"An error occurred: {e}")
+    return sales
+
+class Sale:
+  def __init__(self, id, date, amount, product):
+    self._id = id
+    self._date = date
+    self._amount = amount
+    self._product = product
+
+  @property
+  def get_id(self):
+      return self._id
+
+  @property
+  def get_date(self):
+      return self._date
+
+  @property
+  def get_amount(self):
+      return self._amount
+
+  @property
+  def get_product(self):
+      return self._product
+#
+
+  """@id.setter
+  def id(self, new_id):
+      self._id = new_id
+
+  @date.setter
+  def date(self, new_date):
+      self._date = new_date
+
+  @amount.setter
+  def amount(self, new_amount):
+      self._amount = new_amount
+
+  @product.setter
+  def product(self, new_product):
+      self._product = new_product  """
